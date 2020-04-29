@@ -115,7 +115,7 @@ void EnvTest::TestGain_py(np::ndarray buffer1,
             size.n_samples);
 }
 
-BOOST_PYTHON_MODULE(EnvTest)
+BOOST_PYTHON_MODULE(DSPPythonWrapper)
 {
     using namespace boost::python;
 

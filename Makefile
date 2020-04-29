@@ -19,20 +19,41 @@ BOOST_LIB_LOCATION := ./lib
 BOOST_LIB_FILE := boost_python36
 BOOST_NUMPY_FILE := boost_numpy36
 
+SRC_DIR ?= ./src
+OBJ_DIR = ./build
+
+SRCS := $(shell find $(SRC_DIR) -name '*.cpp' -or -name '*.c' -or -name '*.s')
+OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+DEPS := $(OBJS:.o=.d)
+
+INC_DIRS := include
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+
 CC := gcc
 
-CFLAGS := -Wall -c -fPIC -std=c++11
-CInc := -I$(BOOST_INC) -I$(PYTHON_INC)
+CFLAGS := -Wall -c -fPIC -MMD -MP -std=c++11 -DPYTHON_WRAPPER
+CInc := -I$(BOOST_INC) -I$(PYTHON_INC) $(INC_FLAGS)
 
 CLinkFlags = -shared -Wl,-soname,$@ -Wl,-rpath,$(BOOST_LIB_LOCATION) -L$(BOOST_LIB_LOCATION) -l$(BOOST_LIB_FILE) -l$(BOOST_NUMPY_FILE)
 
+PYTHON_LIB_NAME=DSPPythonWrapper
+
+
 PHONY: all
-all: EnvTest.so
+all: $(PYTHON_LIB_NAME).so
 
-EnvTest.so: EnvTest.o
+DSPLib_py.so: $(PYTHON_LIB_NAME).o
 
-%.so: %.o
-	gcc $^ $(CLinkFlags) -o $@
+%.so: $(OBJS)
+	$(CC) $^ $(CLinkFlags) -o $@
 
-%.o: %.cpp
-	gcc $(CFLAGS) $(CInc) $^
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(CInc) -c -o $@ $<
+
+.PHONY: clean
+
+clean:
+	rm -rf ./build $(PYTHON_LIB_NAME).so
+
+-include $(DEPS)
