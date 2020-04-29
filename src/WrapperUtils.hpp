@@ -20,7 +20,20 @@ class WrapperUtils {
     template<typename ... Args>
     static BufferSize CheckAndGetSize(np::ndarray &buffer_main, np::ndarray &buffer_other,
             Args ... args);
+    template<typename CPP_TYPE>
+    static np::ndarray CheckAndConvertType(np::ndarray &buffer);
 };
+
+
+template<typename CPP_TYPE>
+np::ndarray WrapperUtils::CheckAndConvertType(np::ndarray &buffer) {
+    if (buffer.get_dtype() == np::dtype::get_builtin<CPP_TYPE>()) {
+        return buffer;
+    } else {
+        return buffer.astype(np::dtype::get_builtin<CPP_TYPE>());
+    }
+}
+
 
 #endif  // PYTHON_WRAPPER
 

@@ -11,7 +11,7 @@ class TestBlockOperations(unittest.TestCase):
         z = DSPPythonWrapper.SumTwoArrays(x, y)
         xaxis = np.arange(len(x))
         plt.plot(xaxis, x, xaxis, y, xaxis, z)
-        plt.show()
+        plt.savefig("test_sum.png")
 
 
 if __name__ == '__main__':

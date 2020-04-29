@@ -57,5 +57,4 @@ WrapperUtils::BufferSize WrapperUtils::CheckAndGetSize(np::ndarray &buffer_main,
     return CheckAndGetSize(buffer_main, args...);
 }
 
-
 #endif  // PYTHON_WRAPPER
