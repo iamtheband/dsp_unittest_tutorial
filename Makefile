@@ -43,8 +43,6 @@ CLinkFlags = -shared -Wl,-soname,$@ -Wl,-rpath,$(BOOST_LIB_LOCATION) -L$(BOOST_L
 PHONY: all
 all: $(PYTHON_LIB_NAME).so
 
-DSPLib_py.so: $(PYTHON_LIB_NAME).o
-
 %.so: $(OBJS)
 	$(CC) $^ $(CLinkFlags) -o $@
 
