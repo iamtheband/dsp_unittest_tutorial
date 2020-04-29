@@ -31,12 +31,13 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 CC := gcc
 
-CFLAGS := -Wall -c -fPIC -MMD -MP -std=c++11 -DPYTHON_WRAPPER
+PYTHON_LIB_NAME=DSPPythonWrapper
+PYTHON_EXT_MACRO=PYTHON_WRAPPER
+
+CFLAGS := -Wall -c -fPIC -MMD -MP -std=c++11 -D$(PYTHON_EXT_MACRO)
 CInc := -I$(BOOST_INC) -I$(PYTHON_INC) $(INC_FLAGS)
 
 CLinkFlags = -shared -Wl,-soname,$@ -Wl,-rpath,$(BOOST_LIB_LOCATION) -L$(BOOST_LIB_LOCATION) -l$(BOOST_LIB_FILE) -l$(BOOST_NUMPY_FILE)
-
-PYTHON_LIB_NAME=DSPPythonWrapper
 
 
 PHONY: all

@@ -1,3 +1,5 @@
+#ifdef PYTHON_WRAPPER
+
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
 #include <iostream>
@@ -53,3 +55,5 @@ class EnvTest {
 };
 
 }
+
+#endif

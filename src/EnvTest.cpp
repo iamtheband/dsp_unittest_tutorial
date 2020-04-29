@@ -1,4 +1,6 @@
 #include "EnvTest.hpp"
+
+#ifdef PYTHON_WRAPPER
 // TODO replace with raising Python AssertionError
 #include <cassert>
 
@@ -115,12 +117,4 @@ void EnvTest::TestGain_py(np::ndarray buffer1,
             size.n_samples);
 }
 
-BOOST_PYTHON_MODULE(DSPPythonWrapper)
-{
-    using namespace boost::python;
-
-    class_<EnvTest>("EnvTest", init<float>())
-        .def("TestPrint", &EnvTest::TestPrint)
-        .def("TestSum", &EnvTest::TestSum_py)
-        .def("TestGain", &EnvTest::TestGain_py);
-}
+#endif
