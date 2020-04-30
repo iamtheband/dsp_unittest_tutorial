@@ -26,12 +26,8 @@ BOOST_PYTHON_MODULE(DSPPythonWrapper)
     np::initialize();
 
     // Define functions here
-    def("SumTwoArrays", &BlockOperations::SumTwoArrays_py);
 
     // Define classes here
-    class_<BlockOperations::MonoGain_py>("MonoGain", init<float>())
-        .def("Process", &BlockOperations::MonoGain_py::Process_py)
-        .def("SetGain", &BlockOperations::MonoGain_py::SetGain);
 }
 
 #endif

@@ -59,13 +59,7 @@ class MonoGain {
 
 #ifdef PYTHON_WRAPPER
 
-np::ndarray SumTwoArrays_py(np::ndarray array1, np::ndarray array2);
-
-class MonoGain_py : public MonoGain {
- public:
-    MonoGain_py(float gain) : MonoGain(gain) {}
-    np::ndarray Process_py(np::ndarray array);
-};
+// Write wrapper functions/classes here
 
 #endif
 
