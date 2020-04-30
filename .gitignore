@@ -1,7 +1,7 @@
 venv
-.vscode/
 *.o
 *.so
 *.d
 *.gch
 build/
+.png
