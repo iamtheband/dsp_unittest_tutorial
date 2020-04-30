@@ -1,5 +1,16 @@
+/**
+ * @file BlockOperations.cpp
+ * @author Andrea Martelloni (a.martelloni@qmul.ac.uk)
+ * @brief 
+ * @version 0.1
+ * @date 2020-04-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #include "BlockOperations.hpp"
-#include <iostream>
+
 
 namespace BlockOperations {
 

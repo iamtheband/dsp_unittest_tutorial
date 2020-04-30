@@ -1,3 +1,14 @@
+/**
+ * @file BlockOperations.hpp
+ * @author Andrea Martelloni (a.martelloni@qmul.ac.uk)
+ * @brief 
+ * @version 0.1
+ * @date 2020-04-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #ifndef __BLOCK_OPERATIONS_HPP__
 #define __BLOCK_OPERATIONS_HPP__
 
@@ -16,11 +27,24 @@ namespace np = boost::python::numpy;
 
 namespace BlockOperations {
 
+/**
+ * @brief Sum two arrays together in a third array.
+ * 
+ * @param array1 
+ * @param array2 
+ * @param array_out 
+ * @param n_samples 
+ */
 void SumTwoArrays(float *array1,
     float *array2,
     float *array_out,
     unsigned int n_samples);
 
+
+/**
+ * @brief Applies a fixed, stored gain to a mono signal.
+ * 
+ */
 class MonoGain {
  public:
     MonoGain(float gain);
@@ -48,4 +72,4 @@ class MonoGain_py : public MonoGain {
 }  // namespace BlockOperations
 
 
-#endif  // __ARRAY_OPERATIONS_HPP__
+#endif  // __BLOCK_OPERATIONS_HPP__

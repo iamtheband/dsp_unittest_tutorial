@@ -1,24 +1,23 @@
-# Copyright 2018 Sahaj Software Solutions, Inc.
-# 
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
+# Author: Andrea Martelloni (a.martelloni@qmul.ac.uk)
+# Provided as-is, use at own risk.
 
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Name of your module: MUST match the name of the C++ containing BOOST_PYTHON_MODULE
+PYTHON_LIB_NAME=DSPPythonWrapper
+# Name of the macro you want to use to toggle Python bindings in your code
+PYTHON_EXT_MACRO=PYTHON_WRAPPER
 
+# Change with own Python version from the "include" directory
 PYTHON_VERSION := 3.6m
+# Change to own Python's path (system path, NOT venv)
 PYTHON_INC := /import/linux/python/3.6.6/include/python$(PYTHON_VERSION)
+# Change to location of Boost library (either local or system-wide)
 BOOST_INC := ./include
 BOOST_LIB_LOCATION := ./lib
+# Change to names of libboost_python and libboost_numpy
 BOOST_LIB_FILE := boost_python36
 BOOST_NUMPY_FILE := boost_numpy36
 
+# Add here any (more) source folders
 SRC_DIR ?= ./src
 OBJ_DIR = ./build
 
@@ -26,14 +25,12 @@ SRCS := $(shell find $(SRC_DIR) -name '*.cpp' -or -name '*.c' -or -name '*.s')
 OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS := $(OBJS:.o=.d)
 
+# Add here any (more) include folders
 INC_DIRS := include
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
+# Change if you fancy using Clang
 CC := gcc
-
-PYTHON_LIB_NAME=DSPPythonWrapper
-PYTHON_EXT_MACRO=PYTHON_WRAPPER
-
 CFLAGS := -Wall -c -fPIC -MMD -MP -std=c++11 -D$(PYTHON_EXT_MACRO)
 CInc := -I$(BOOST_INC) -I$(PYTHON_INC) $(INC_FLAGS)
 
