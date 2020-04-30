@@ -18,7 +18,10 @@ BOOST_PYTHON_MODULE(DSPPythonWrapper)
     // Define functions here
     def("SumTwoArrays", &BlockOperations::SumTwoArrays_py);
 
-    // Define clases here
+    // Define classes here
+    class_<BlockOperations::MonoGain_py>("MonoGain", init<float>())
+        .def("Process", &BlockOperations::MonoGain_py::Process_py)
+        .def("SetGain", &BlockOperations::MonoGain_py::SetGain);
     class_<Test::EnvTest>("EnvTest", init<float>())
         .def("TestPrint", &Test::EnvTest::TestPrint)
         .def("TestSum", &Test::EnvTest::TestSum_py)

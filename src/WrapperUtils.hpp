@@ -22,6 +22,8 @@ class WrapperUtils {
             Args ... args);
     template<typename CPP_TYPE>
     static np::ndarray CheckAndConvertType(np::ndarray &buffer);
+    template<typename CPP_TYPE>
+    static np::ndarray AllocateArray(BufferSize size);
 };
 
 
@@ -32,6 +34,20 @@ np::ndarray WrapperUtils::CheckAndConvertType(np::ndarray &buffer) {
     } else {
         return buffer.astype(np::dtype::get_builtin<CPP_TYPE>());
     }
+}
+
+
+template<typename CPP_TYPE>
+np::ndarray WrapperUtils::AllocateArray(BufferSize size) {
+    p::tuple sizetuple;
+    if (1 == size.n_channels) {
+        // 1-d array
+        sizetuple = p::make_tuple(size.n_samples);
+    } else {
+        // Interleaved array
+        sizetuple = p::make_tuple(size.n_samples, size.n_channels);
+    }
+    return np::zeros(sizetuple, np::dtype::get_builtin<CPP_TYPE>());
 }
 
 

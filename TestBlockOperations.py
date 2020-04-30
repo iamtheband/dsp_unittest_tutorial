@@ -13,6 +13,21 @@ class TestBlockOperations(unittest.TestCase):
         plt.plot(xaxis, x, xaxis, y, xaxis, z)
         plt.savefig("test_sum.png")
 
+    def test_MonoGain(self):
+        g = DSPPythonWrapper.MonoGain(0)
+        x = np.arange(20)
+        y = np.zeros(x.shape)
+        gains = np.array([1, 2, 0.1, 0])
+        pieces = 4
+        stride = len(y) // pieces
+        for chunk_n, chunk in enumerate(x.reshape(pieces, stride)):
+            current_gain = gains[chunk_n]
+            g.SetGain(current_gain)
+            result = g.Process(chunk)
+            y[chunk_n*stride:(chunk_n+1)*stride] = result
+        plt.plot(x, x, x, y)
+        plt.savefig("test_gain.png")
+
 
 if __name__ == '__main__':
     unittest.main()

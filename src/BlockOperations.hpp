@@ -37,9 +37,15 @@ class MonoGain {
 
 np::ndarray SumTwoArrays_py(np::ndarray array1, np::ndarray array2);
 
+class MonoGain_py : public MonoGain {
+ public:
+    MonoGain_py(float gain) : MonoGain(gain) {}
+    np::ndarray Process_py(np::ndarray array);
+};
+
 #endif
 
-}
+}  // namespace BlockOperations
 
 
 #endif  // __ARRAY_OPERATIONS_HPP__
