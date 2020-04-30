@@ -23,7 +23,9 @@ class WrapperUtils {
     template<typename CPP_TYPE>
     static np::ndarray CheckAndConvertType(np::ndarray &buffer);
     template<typename CPP_TYPE>
-    static np::ndarray AllocateArray(BufferSize size);
+    static np::ndarray AllocateBuffer(BufferSize size);
+    template<typename CPP_TYPE>
+    static inline CPP_TYPE* GetData(np::ndarray &buffer);
 };
 
 
@@ -38,7 +40,7 @@ np::ndarray WrapperUtils::CheckAndConvertType(np::ndarray &buffer) {
 
 
 template<typename CPP_TYPE>
-np::ndarray WrapperUtils::AllocateArray(BufferSize size) {
+np::ndarray WrapperUtils::AllocateBuffer(BufferSize size) {
     p::tuple sizetuple;
     if (1 == size.n_channels) {
         // 1-d array
@@ -48,6 +50,12 @@ np::ndarray WrapperUtils::AllocateArray(BufferSize size) {
         sizetuple = p::make_tuple(size.n_samples, size.n_channels);
     }
     return np::zeros(sizetuple, np::dtype::get_builtin<CPP_TYPE>());
+}
+
+
+template<typename CPP_TYPE>
+CPP_TYPE* WrapperUtils::GetData(np::ndarray &buffer) {
+    return reinterpret_cast<CPP_TYPE *>(buffer.get_data());
 }
 
 

@@ -10,6 +10,7 @@ class TestBlockOperations(unittest.TestCase):
         y = 10 * np.ones(x.shape)
         z = DSPPythonWrapper.SumTwoArrays(x, y)
         xaxis = np.arange(len(x))
+        plt.figure()
         plt.plot(xaxis, x, xaxis, y, xaxis, z)
         plt.savefig("test_sum.png")
 
@@ -25,6 +26,7 @@ class TestBlockOperations(unittest.TestCase):
             g.SetGain(current_gain)
             result = g.Process(chunk)
             y[chunk_n*stride:(chunk_n+1)*stride] = result
+        plt.figure()
         plt.plot(x, x, x, y)
         plt.savefig("test_gain.png")
 
