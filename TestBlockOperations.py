@@ -1,3 +1,9 @@
+"""@package Python tests for the BlockOperations class
+@author Andrea Martelloni (a.martelloni@qmul.ac.uk)
+
+Provided as-is, use at own risk.
+"""
+
 import DSPPythonWrapper
 import unittest
 import numpy as np
