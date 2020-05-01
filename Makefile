@@ -7,15 +7,15 @@ PYTHON_LIB_NAME=DSPPythonWrapper
 PYTHON_EXT_MACRO=PYTHON_WRAPPER
 
 # Change with own Python version from the "include" directory
-PYTHON_VERSION := 3.6m
+PYTHON_VERSION := 3.8
 # Change to own Python's path (system path, NOT venv)
-PYTHON_INC := /import/linux/python/3.6.6/include/python$(PYTHON_VERSION)
+PYTHON_INC := /usr/include/python$(PYTHON_VERSION)
 # Change to location of Boost library (either local or system-wide)
-BOOST_INC := ./include
-BOOST_LIB_LOCATION := ./lib
+BOOST_INC := /usr/include/boost
+BOOST_LIB_LOCATION := /usr/lib/x86_64-linux-gnu
 # Change to names of libboost_python and libboost_numpy
-BOOST_LIB_FILE := boost_python36
-BOOST_NUMPY_FILE := boost_numpy36
+BOOST_LIB_FILE := boost_python38
+BOOST_NUMPY_FILE := boost_numpy38
 
 # Add here any (more) source folders
 SRC_DIR ?= ./src
